@@ -1,0 +1,83 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: korrk
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: korrk
+  namespace: korrk
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: korrk
+  template:
+    metadata:
+      labels:
+        app: korrk
+    spec:
+      containers:
+        - name: korrk
+          image: kube-manifest.kr.ncr.ntruss.com/korrk:0dcb2f5a
+          command:
+            - /bin/sh
+            - -ec
+          args:
+            - |
+              pnpm start:prod
+          envFrom:
+            - configMapRef:
+                name: korrk-server-env
+          ports:
+            - containerPort: 3000
+      imagePullSecrets:
+        - name: ncp-registry-credentials
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: korrk
+  name: korrk
+  labels:
+    app: korrk
+spec:
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000
+  selector:
+    app: korrk
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  namespace: korrk
+  name: korrk-ingress
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    cert-manager.io/issuer: tls-issuer
+spec:
+  rules:
+    - host: "korrk.kr"
+      http:
+        paths:
+          - path: "/api"
+            pathType: Prefix
+            backend:
+              service:
+                name: korrk
+                port:
+                  number: 3000
+          - path: "/"
+            pathType: Prefix
+            backend:
+              service:
+                name: korrk
+                port:
+                  number: 3000
+  tls:
+    - hosts:
+        - "korrk.kr"
+      secretName: tls-secret-ingress
