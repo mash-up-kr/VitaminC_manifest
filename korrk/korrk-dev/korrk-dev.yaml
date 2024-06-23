@@ -21,12 +21,6 @@ spec:
       containers:
         - name: korrk-dev
           image: korrk-docker-image.kr.ncr.ntruss.com/korrk:test
-          env:
-            - name: DATABASE_URL
-              valueFrom:
-                configMapKeyRef:
-                  name: korrk-dev-server-env
-                  key: DATABASE_URL
           command:
             - /bin/sh
             - -ec
