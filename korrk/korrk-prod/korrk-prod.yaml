@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: korrk
-          image: kube-manifest.kr.ncr.ntruss.com/korrk:0dcb2f5a
+          image: korrk-docker-image.kr.ncr.ntruss.com/korrk:test # 테스트를 위한 임시 이미지
           command:
             - /bin/sh
             - -ec
@@ -31,7 +31,7 @@ spec:
             - configMapRef:
                 name: korrk-server-env
           ports:
-            - containerPort: 3000
+            - containerPort: 8000
       imagePullSecrets:
         - name: ncp-registry-credentials
 ---
@@ -43,10 +43,11 @@ metadata:
   labels:
     app: korrk
 spec:
+  type: ClusterIP
   ports:
     - protocol: TCP
       port: 3000
-      targetPort: 3000
+      targetPort: 8000
   selector:
     app: korrk
 ---
@@ -56,28 +57,24 @@ metadata:
   namespace: korrk
   name: korrk-ingress
   annotations:
-    kubernetes.io/ingress.class: traefik
-    cert-manager.io/issuer: tls-issuer
+    # kubernetes.io/ingress.class: traefik
+    # traefik.ingress.kubernetes.io/router.tls: "true"
+    # traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    # cert-manager.io/cluster-issuer: korrk-letsencrypt   # 클러스터 이슈어 (cluster-issuer.yaml)에서 지정한 명칭
 spec:
+  # tls:
+  # - hosts:
+  #   - api.korrk.kr                           # 인증서를 적용할 도메인으로 변경
+  #   secretName: api-korrk-kr-cert         # 인증서 key가 저장되는 secret
+  ingressClassName: traefik
   rules:
-    - host: "korrk.kr"
-      http:
-        paths:
-          - path: "/api"
-            pathType: Prefix
-            backend:
-              service:
-                name: korrk
-                port:
-                  number: 3000
-          - path: "/"
-            pathType: Prefix
-            backend:
-              service:
-                name: korrk
-                port:
-                  number: 3000
-  tls:
-    - hosts:
-        - "korrk.kr"
-      secretName: tls-secret-ingress
+  - host: api.korrk.kr
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: korrk
+            port:
+              number: 3000
