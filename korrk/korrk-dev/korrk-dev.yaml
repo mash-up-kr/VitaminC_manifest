@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: korrk-dev
-          image: korrk-docker-image.kr.ncr.ntruss.com/korrk-dev:9a69cabb
+          image: korrk-docker-image.kr.ncr.ntruss.com/korrk-dev:3b32b783
           command:
             - /bin/sh
             - -ec
