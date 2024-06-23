@@ -31,7 +31,7 @@ spec:
             - configMapRef:
                 name: korrk-dev-server-env
           ports:
-            - containerPort: 3000
+            - containerPort: 8000
       imagePullSecrets:
         - name: ncp-registry-credentials
 ---
@@ -44,7 +44,7 @@ spec:
   type: NodePort
   ports:
     - port: 3000
-      targetPort: 3000
+      targetPort: 8000
       nodePort: 30001
   selector:
     app: korrk-dev
