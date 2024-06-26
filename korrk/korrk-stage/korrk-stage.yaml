@@ -1,22 +1,22 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: korrk-dev
+  name: korrk-stage
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: korrk-dev
-  namespace: korrk-dev
+  name: korrk-stage
+  namespace: korrk-stage
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: korrk-dev
+      app: korrk-stage
   template:
     metadata:
       labels:
-        app: korrk-dev
+        app: korrk-stage
     spec:
       containers:
         - name: korrk-dev
@@ -29,7 +29,7 @@ spec:
               pnpm start:dev
           envFrom:
             - configMapRef:
-                name: korrk-dev-server-env
+                name: korrk-stage-server-env
           ports:
             - containerPort: 8000
       imagePullSecrets:
@@ -38,8 +38,8 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: korrk-dev
-  namespace: korrk-dev
+  name: korrk-stage
+  namespace: korrk-stage
 spec:
   type: NodePort
   ports:
@@ -47,4 +47,4 @@ spec:
       targetPort: 8000
       nodePort: 30001
   selector:
-    app: korrk-dev
+    app: korrk-stage
