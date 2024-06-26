@@ -19,14 +19,14 @@ spec:
         app: korrk-stage
     spec:
       containers:
-        - name: korrk-dev
+        - name: korrk-stage
           image: korrk-docker-image.kr.ncr.ntruss.com/korrk-dev:dc1459f2
           command:
             - /bin/sh
             - -ec
           args:
             - |
-              pnpm start:dev
+              pnpm start:stage
           envFrom:
             - configMapRef:
                 name: korrk-stage-server-env
