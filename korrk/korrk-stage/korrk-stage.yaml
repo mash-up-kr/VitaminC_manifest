@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: korrk-stage
-          image: korrk-docker-image.kr.ncr.ntruss.com/korrk-stage:32b8bd7f
+          image: korrk-docker-image.kr.ncr.ntruss.com/korrk-stage:d593aca2
           command:
             - /bin/sh
             - -ec
