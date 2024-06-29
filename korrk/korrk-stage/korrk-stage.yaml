@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: korrk-stage
-          image: korrk-docker-image.kr.ncr.ntruss.com/korrk-stage:0537c532
+          image: korrk-docker-image.kr.ncr.ntruss.com/korrk-stage:081d6e74
           command:
             - /bin/sh
             - -ec
@@ -44,7 +44,3 @@ spec:
       nodePort: 30001
   selector:
     app: korrk-stage
-  template:
-    spec:
-      containers:
-        - image: korrk-docker-image.kr.ncr.ntruss.com/korrk-stage:081d6e74
