@@ -44,3 +44,31 @@ spec:
       nodePort: 30001
   selector:
     app: korrk-stage
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  namespace: korrk-stage
+  name: korrk-stage-ingress
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    traefik.ingress.kubernetes.io/router.tls: "true"
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    cert-manager.io/cluster-issuer: korrk-letsencrypt # 클러스터 이슈어 (cluster-issuer.yaml)에서 지정한 명칭
+spec:
+  tls:
+    - hosts:
+        - api-dev.korrk.kr # 인증서를 적용할 도메인으로 변경
+      secretName: api-stage-korrk-kr-cert # 인증서 key가 저장되는 secret
+  ingressClassName: traefik
+  rules:
+    - host: api-dev.korrk.kr
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: korrk-stage
+                port:
+                  number: 3000
