@@ -47,4 +47,4 @@ spec:
   template:
     spec:
       containers:
-        - image: korrk-docker-image.kr.ncr.ntruss.com/korrk-stage:cfd51008
+        - image: korrk-docker-image.kr.ncr.ntruss.com/korrk-stage:ad4bf5f0
