@@ -44,7 +44,3 @@ spec:
       nodePort: 30001
   selector:
     app: korrk-stage
-  template:
-    spec:
-      containers:
-        - image: korrk-docker-image.kr.ncr.ntruss.com/korrk-stage:ad4bf5f0
