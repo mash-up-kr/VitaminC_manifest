@@ -5,11 +5,11 @@ metadata:
 spec:
   acme:
     server: https://acme-v02.api.letsencrypt.org/directory # The ACME server URL
-    email: sally734595@gmail.com  # Email address used for ACME registration
+    email: sally734595@gmail.com # Email address used for ACME registration
     privateKeySecretRef: # Name of a secret used to store the ACME account private key
       name: korrk-letsencryptd
-    solvers:  # Enable the HTTP-01 challenge provider
-    - http01:
-        ingress:
-          serviceType: ClusterIP
-          class: traefik # 자신의 ingress 컨트롤러 타입 기재
+    solvers: # Enable the HTTP-01 challenge provider
+      - http01:
+          ingress:
+            serviceType: ClusterIP
+            class: traefik # 자신의 ingress 컨트롤러 타입 기재
