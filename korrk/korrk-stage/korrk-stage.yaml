@@ -21,7 +21,7 @@ spec:
             - -ec
           args:
             - |
-              pnpm migrate:up
+              # pnpm migrate:up
               pnpm start:stage
           envFrom:
             - configMapRef:
@@ -52,7 +52,9 @@ metadata:
   name: korrk-stage-ingress
   annotations:
     kubernetes.io/ingress.class: traefik
+    # traefik.ingress.kubernetes.io/session-cookie-name: "Authorization"
     traefik.ingress.kubernetes.io/session-cookie-samesite: "None"
+    traefik.ingress.kubernetes.io/session-cookie-secure: "true"
     traefik.ingress.kubernetes.io/router.tls: "true"
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
     cert-manager.io/cluster-issuer: korrk-letsencrypt # 클러스터 이슈어 (cluster-issuer.yaml)에서 지정한 명칭
