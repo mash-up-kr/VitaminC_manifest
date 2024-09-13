@@ -23,7 +23,7 @@ spec:
             - -ec
           args:
             - |
-              # pnpm migrate:up
+              pnpm migrate:up
               pnpm start:stage
           envFrom:
             - configMapRef:
