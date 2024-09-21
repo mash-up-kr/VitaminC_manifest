@@ -17,7 +17,7 @@ spec:
       #   kubernetes.io/hostname: vitaminc
       containers:
         - name: korrk-stage
-          image: korrk-docker-image.kr.ncr.ntruss.com/korrk-stage:768f8885
+          image: korrk-docker-image.kr.ncr.ntruss.com/korrk-stage:677c1ae1
           command:
             - /bin/sh
             - -ec
