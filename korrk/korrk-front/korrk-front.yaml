@@ -1,0 +1,72 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: korrk-front
+  namespace: korrk-front
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: korrk-front
+  template:
+    metadata:
+      labels:
+        app: korrk-front
+    spec:
+      containers:
+        - name: korrk-front
+          image: korrk-docker-image.kr.ncr.ntruss.com/korrk-front:test
+          command:
+            - /bin/sh
+            - -ec
+          args:
+            - |
+              npm run start
+          ports:
+            - containerPort: 3000
+      imagePullSecrets:
+        - name: ncp-registry-credentials
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: korrk-front
+  namespace: korrk-front
+spec:
+  type: NodePort
+  ports:
+    - port: 3000
+      targetPort: 3000
+      nodePort: 30006
+  selector:
+    app: korrk-front
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  namespace: korrk-front
+  name: korrk-front-ingress
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    traefik.ingress.kubernetes.io/session-cookie-samesite: "None"
+    traefik.ingress.kubernetes.io/session-cookie-secure: "true"
+    traefik.ingress.kubernetes.io/router.tls: "true"
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    cert-manager.io/cluster-issuer: korrk-letsencrypt # 클러스터 이슈어 (cluster-issuer.yaml)에서 지정한 명칭
+spec:
+  tls:
+    - hosts:
+        - www.korrk.kr # 인증서를 적용할 도메인으로 변경
+      secretName: api-front-korrk-kr-cert # 인증서 key가 저장되는 secret
+  ingressClassName: traefik
+  rules:
+    - host: www.korrk.kr
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: korrk-front
+                port:
+                  number: 3000
