@@ -57,10 +57,21 @@ spec:
   tls:
     - hosts:
         - korrk.kr # 인증서를 적용할 도메인으로 변경
+        - www.korrk.kr
       secretName: api-front-korrk-kr-cert # 인증서 key가 저장되는 secret
   ingressClassName: traefik
   rules:
     - host: korrk.kr
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: korrk-front
+                port:
+                  number: 3000
+    - host: www.korrk.kr # 추가된 도메인에 대한 규칙
       http:
         paths:
           - path: /
