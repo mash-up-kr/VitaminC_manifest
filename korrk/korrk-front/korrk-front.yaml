@@ -56,11 +56,11 @@ metadata:
 spec:
   tls:
     - hosts:
-        - www.korrk.kr # 인증서를 적용할 도메인으로 변경
+        - dev.korrk.kr # 인증서를 적용할 도메인으로 변경
       secretName: api-front-korrk-kr-cert # 인증서 key가 저장되는 secret
   ingressClassName: traefik
   rules:
-    - host: www.korrk.kr
+    - host: dev.korrk.kr
       http:
         paths:
           - path: /
