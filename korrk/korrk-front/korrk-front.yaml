@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: korrk-front
-          image: korrk-docker-image.kr.ncr.ntruss.com/korrk-front:fcf64c04
+          image: korrk-docker-image.kr.ncr.ntruss.com/korrk-front:8a8e7fdb
           command:
             - /bin/sh
             - -ec
