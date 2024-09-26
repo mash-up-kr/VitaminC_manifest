@@ -48,16 +48,16 @@ metadata:
   name: korrk-front-ingress
   annotations:
     kubernetes.io/ingress.class: traefik
-    traefik.ingress.kubernetes.io/session-cookie-samesite: "None"
-    traefik.ingress.kubernetes.io/session-cookie-secure: "true"
-    traefik.ingress.kubernetes.io/router.tls: "true"
-    traefik.ingress.kubernetes.io/router.entrypoints: websecure
-    cert-manager.io/cluster-issuer: korrk-letsencrypt # 클러스터 이슈어 (cluster-issuer.yaml)에서 지정한 명칭
+#    traefik.ingress.kubernetes.io/session-cookie-samesite: "None"
+#    traefik.ingress.kubernetes.io/session-cookie-secure: "true"
+#    traefik.ingress.kubernetes.io/router.tls: "true"
+#    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+#    cert-manager.io/cluster-issuer: korrk-letsencrypt # 클러스터 이슈어 (cluster-issuer.yaml)에서 지정한 명칭
 spec:
-  tls:
-    - hosts:
-        - dev.korrk.kr # 인증서를 적용할 도메인으로 변경
-      secretName: api-front-korrk-kr-cert # 인증서 key가 저장되는 secret
+#  tls:
+#    - hosts:
+#        - dev.korrk.kr # 인증서를 적용할 도메인으로 변경
+#      secretName: api-front-korrk-kr-cert # 인증서 key가 저장되는 secret
   ingressClassName: traefik
   rules:
     - host: dev.korrk.kr
