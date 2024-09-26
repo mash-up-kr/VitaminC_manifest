@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: korrk-front
-          image: korrk-docker-image.kr.ncr.ntruss.com/korrk-front:1db40eb2
+          image: korrk-docker-image.kr.ncr.ntruss.com/korrk-front:a41247ca
           command:
             - /bin/sh
             - -ec
@@ -48,7 +48,7 @@ metadata:
   name: korrk-front-ingress
   annotations:
     kubernetes.io/ingress.class: traefik
-#    traefik.ingress.kubernetes.io/session-cookie-samesite: "None"
+    #    traefik.ingress.kubernetes.io/session-cookie-samesite: "None"
     traefik.ingress.kubernetes.io/session-cookie-secure: "true"
     traefik.ingress.kubernetes.io/router.tls: "true"
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
