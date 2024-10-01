@@ -30,6 +30,7 @@ spec:
                 name: korrk-stage-server-env
           ports:
             - containerPort: 8000
+      priorityClassName: high-priority
       imagePullSecrets:
         - name: ncp-registry-credentials
 ---

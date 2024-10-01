@@ -26,6 +26,7 @@ spec:
               npm run start
           ports:
             - containerPort: 3000
+      priorityClassName: high-priority
       imagePullSecrets:
         - name: ncp-registry-credentials
 ---
