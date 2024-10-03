@@ -17,7 +17,7 @@ spec:
         kubernetes.io/hostname: vitaminc-woker
       containers:
         - name: korrk-front
-          image: korrk-docker-image.kr.ncr.ntruss.com/korrk-front:813e9c9c
+          image: korrk-docker-image.kr.ncr.ntruss.com/korrk-front:0b5e84ac
           command:
             - /bin/sh
             - -ec
