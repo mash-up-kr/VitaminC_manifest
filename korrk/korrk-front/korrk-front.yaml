@@ -4,7 +4,7 @@ metadata:
   name: korrk-front
   namespace: korrk-front
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: korrk-front
