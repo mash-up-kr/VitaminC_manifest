@@ -22,7 +22,7 @@ spec:
                   operator: In
                   values:
                   - "vitaminc-worker"
-#                  - "holly"
+                  - "vitaminc-worker2"
       containers:
         - name: korrk-stage
           image: korrk-docker-image.kr.ncr.ntruss.com/korrk-stage:cd1c86af
