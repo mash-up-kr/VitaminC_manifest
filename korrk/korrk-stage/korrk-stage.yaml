@@ -13,16 +13,6 @@ spec:
       labels:
         app: korrk-stage
     spec:
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-              - matchExpressions:
-                  - key: "kubernetes.io/hostname"
-                    operator: In
-                    values:
-                      - "vitaminc-worker"
-                      - "vitaminc-worker2"
       containers:
         - name: korrk-stage
           image: korrk-docker-image.kr.ncr.ntruss.com/korrk-stage:571cfa66
