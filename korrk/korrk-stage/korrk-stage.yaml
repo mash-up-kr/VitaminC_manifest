@@ -13,8 +13,16 @@ spec:
       labels:
         app: korrk-stage
     spec:
-      # nodeSelector:
-      #   kubernetes.io/hostname: vitaminc
+      affinity:
+          nodeAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              nodeSelectorTerms:
+              - matchExpressions:
+                - key: "kubernetes.io/hostname"
+                  operator: In
+                  values:
+                  - "vitaminc-worker"
+                  - "holly"
       containers:
         - name: korrk-stage
           image: korrk-docker-image.kr.ncr.ntruss.com/korrk-stage:cd1c86af
