@@ -13,6 +13,8 @@ spec:
       labels:
         app: korrk-stage
     spec:
+      nodeSelector:
+        kubernetes.io/hostname: vitaminc-worker2
       containers:
         - name: korrk-stage
           image: korrk-docker-image.kr.ncr.ntruss.com/korrk-stage:2886c92b
