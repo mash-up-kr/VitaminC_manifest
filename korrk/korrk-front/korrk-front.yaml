@@ -13,8 +13,6 @@ spec:
       labels:
         app: korrk-front
     spec:
-      nodeSelector:
-        kubernetes.io/hostname: vitaminc-woker
       containers:
         - name: korrk-front
           image: korrk-docker-image.kr.ncr.ntruss.com/korrk-front:0f944983
